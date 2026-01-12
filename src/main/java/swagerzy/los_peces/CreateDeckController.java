@@ -7,8 +7,11 @@ package swagerzy.los_peces;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import swagerzy.Model.DeckManager;
 
 /**
  * FXML Controller class
@@ -17,16 +20,30 @@ import javafx.fxml.Initializable;
  */
 public class CreateDeckController extends Controller implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        this.deckManager = DeckManager.getInstance();
     }    
     
     @FXML
+    private TextField deckNameField;
+
+    @FXML
+    private TextArea deckDescriptionField;
+    
+    @FXML
     private void createDeck() throws IOException {
+        
+        String name = deckNameField.getText();
+        String description = deckDescriptionField.getText();
+
+        // Walidacja (czy nie puste)
+        if (name == null || name.trim().isEmpty()) {
+            System.out.println("Error. El deck necesita un nombre");
+            return; // przerwij
+        }
+        
+        this.deckManager.createDeck(name, description);
         App.setRoot("MainMenu");
     }
     

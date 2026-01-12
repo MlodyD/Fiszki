@@ -18,28 +18,16 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        DeckManager deckManager = new DeckManager();
 
         // Twój loadFXML zwraca Parent/root
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TitlePage.fxml"));
         Parent root = loader.load();
-        TitlePageController titleCtrl = loader.getController();  // pobierz kontroler
-        titleCtrl.setDeckManager(deckManager);  // ustaw manager!
 
         scene = new Scene(root, 640, 480);
         stage.setScene(scene);
         stage.setTitle("La App de Peces");
         stage.show();
     }
-    
-        private void switchTo(String fxmlPath, DeckManager deckManager) throws IOException {
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            scene.setRoot(loader.load());
-            Controller ctrl = loader.getController();
-            ctrl.setDeckManager(deckManager);
-    }
-
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
