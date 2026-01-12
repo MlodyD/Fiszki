@@ -1,40 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="swagerzy.los_peces.MainMenuController">
-   <children>
-      <Label layoutX="214.0" layoutY="7.0" text="Los Peces">
+<BorderPane prefHeight="400.0" prefWidth="600.0" 
+            styleClass="mainFxmlClass" 
+            stylesheets="@../styles/style.css" 
+            xmlns="http://javafx.com/javafx/25" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="swagerzy.los_peces.MainMenuController">
+
+   <!-- GÓRA: Tytuł -->
+   <top>
+      <Label text="Los Peces" BorderPane.alignment="CENTER">
          <font>
             <Font name="AkayaKanadaka-Regular" size="40.0" />
          </font>
+         <BorderPane.margin>
+            <Insets top="10.0" bottom="10.0" />
+         </BorderPane.margin>
       </Label>
-      <ScrollPane fx:id="sp" layoutX="83.0" layoutY="111.0" prefHeight="400.0" prefWidth="452.0" vbarPolicy="NEVER"> 
-        <!-- Dodałem prefHeight do ScrollPane, żeby miał jakiś rozmiar w oknie -->
-          <content>
-              <!-- VBOX BEZPOŚREDNIO TUTAJ -->
-              <VBox fx:id="vbox" alignment="TOP_CENTER" prefWidth="320.0" />
-          </content>
-        </ScrollPane>
-      <HBox layoutX="83.0" layoutY="57.0" prefHeight="50.0" prefWidth="452.0">
+   </top>
+
+   <!-- ŚRODEK: Przyciski + Lista (rozciągliwa) -->
+   <center>
+      <VBox alignment="TOP_CENTER" spacing="15.0">
+         <BorderPane.margin>
+             <!-- Marginesy, żeby lista nie dotykała krawędzi okna -->
+            <Insets left="20.0" right="20.0" bottom="20.0" />
+         </BorderPane.margin>
+         
          <children>
-            <AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="231.0">
+            <!-- Przyciski w HBox - zawsze na środku -->
+            <HBox alignment="CENTER" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#goToCreateDeck" prefHeight="44.0" prefWidth="225.0" text="Crear nueva Baraja" />
+                  <Button onAction="#goToCreateDeck" 
+                          text="Crear nueva Baraja" 
+                          prefHeight="44.0" prefWidth="200.0" />
+                  <Button text="Cargar una Baraja" 
+                          prefHeight="44.0" prefWidth="200.0" />
                </children>
-            </AnchorPane>
-            <AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="229.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="225.0" text="Cargar una Baraja" />
-               </children>
-            </AnchorPane>
+            </HBox>
+
+            <!-- ScrollPane - rozciąga się na resztę miejsca (ALWAYS) -->
+            <ScrollPane fx:id="sp" fitToWidth="true" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
+               <content>
+                  <!-- VBox wewnątrz listy, też wyśrodkowany -->
+                  <VBox fx:id="vbox" alignment="TOP_CENTER" spacing="10.0">
+                      <padding>
+                          <Insets top="10.0" bottom="10.0" />
+                      </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
          </children>
-      </HBox>
-   </children>
-</AnchorPane>
+      </VBox>
+   </center>
+
+</BorderPane>

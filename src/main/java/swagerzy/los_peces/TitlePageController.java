@@ -15,11 +15,8 @@ import javafx.fxml.Initializable;
  *
  * @author maciejdaszkiewicz
  */
-public class TitlePageController implements Initializable {
+public class TitlePageController extends Controller implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
  *
  * @author maciejdaszkiewicz
  */
-public class MainMenuController implements Initializable {
+public class MainMenuController extends Controller implements Initializable {
 
     @FXML
     private VBox vbox; // Upewnij się, że masz to fx:id w SceneBuilderze!

@@ -4,8 +4,10 @@
  */
 package swagerzy.los_peces;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -13,7 +15,7 @@ import javafx.fxml.Initializable;
  *
  * @author maciejdaszkiewicz
  */
-public class CreateDeckController implements Initializable {
+public class CreateDeckController extends Controller implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -22,5 +24,10 @@ public class CreateDeckController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    @FXML
+    private void createDeck() throws IOException {
+        App.setRoot("MainMenu");
+    }
     
 }

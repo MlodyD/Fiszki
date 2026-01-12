@@ -1,8 +1,9 @@
+swagerzy/los_peces/Controller.class
 swagerzy/los_peces/TitlePageController.class
+swagerzy/los_peces/App.class
 swagerzy/Model/Deck.class
 swagerzy/los_peces/MainMenuController.class
 swagerzy/Model/Flashcard.class
 module-info.class
 swagerzy/los_peces/CreateDeckController.class
-swagerzy/los_peces/App.class
 swagerzy/Model/DeckManager.class
