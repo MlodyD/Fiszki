@@ -4,6 +4,7 @@
  */
 package swagerzy.los_peces;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -44,6 +45,11 @@ public class MainMenuController implements Initializable {
         }
         
         System.out.println("--- KONIEC TESTU ---");
+    }
+    
+    @FXML
+    private void goToCreateDeck() throws IOException {
+        App.setRoot("CreateDeck");
     }
 
 }

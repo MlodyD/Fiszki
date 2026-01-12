@@ -15,23 +15,23 @@
             <Font name="AkayaKanadaka-Regular" size="40.0" />
          </font>
       </Label>
-      <ScrollPane fx:id="sp" layoutX="133.0" layoutY="111.0" prefHeight="400.0" prefWidth="335.0" vbarPolicy="NEVER"> 
+      <ScrollPane fx:id="sp" layoutX="83.0" layoutY="111.0" prefHeight="400.0" prefWidth="452.0" vbarPolicy="NEVER"> 
         <!-- Dodałem prefHeight do ScrollPane, żeby miał jakiś rozmiar w oknie -->
           <content>
               <!-- VBOX BEZPOŚREDNIO TUTAJ -->
               <VBox fx:id="vbox" alignment="TOP_CENTER" prefWidth="320.0" />
           </content>
         </ScrollPane>
-      <HBox layoutX="130.0" layoutY="57.0" prefHeight="50.0" prefWidth="335.0">
+      <HBox layoutX="83.0" layoutY="57.0" prefHeight="50.0" prefWidth="452.0">
          <children>
-            <AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="231.0">
                <children>
-                  <Button mnemonicParsing="false" text="Crear nueva pez" />
+                  <Button mnemonicParsing="false" onAction="#goToCreateDeck" prefHeight="44.0" prefWidth="225.0" text="Crear nueva Baraja" />
                </children>
             </AnchorPane>
-            <AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="229.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="17.0" prefWidth="158.0" text="Cargar una pez" />
+                  <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="225.0" text="Cargar una Baraja" />
                </children>
             </AnchorPane>
          </children>
