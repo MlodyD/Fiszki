@@ -16,7 +16,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import swagerzy.Model.composite.Deck;
 import swagerzy.Model.DeckManager;
+import swagerzy.Model.command.Command;
+import swagerzy.Model.command.OpenDeckCommand;
+import swagerzy.Model.command.OpenFlashcardCommand;
 import swagerzy.Model.composite.CompositeElement;
+import swagerzy.Model.composite.Flashcard;
 
 public class DeckViewController extends Controller implements Initializable {
 
@@ -26,47 +30,58 @@ public class DeckViewController extends Controller implements Initializable {
     private ScrollPane sp;
     @FXML
     private Label DeckTitle;
+    @FXML
+    private Label DeckDescription;
 
     // ..
 
     @Override
-public void initialize(URL url, ResourceBundle rb) {
-    // 1. Czyścimy widok (na wszelki wypadek)
-    vbox.getChildren().clear();
+    public void initialize(URL url, ResourceBundle rb) {
 
-    this.deckManager = DeckManager.getInstance();
-    
-    // 2. Pobieramy talię
-    Deck current = deckManager.getCurrentDeck();
-    
-    // 3. Najpierw sprawdzamy czy talia istnieje!
-    if (current != null) {
-        DeckTitle.setText(current.getFront()); // Ustawiamy tytuł
+        this.deckManager = DeckManager.getInstance();
         
-        // 4. Dopiero teraz bezpiecznie pobieramy elementy
-        List<CompositeElement> elementList = current.getChildren();
+        Deck current = deckManager.getCurrentDeck();
 
-        for (CompositeElement currentElement : elementList) {
-            Button btn = new Button(currentElement.getFront());
-            btn.getStyleClass().add("deck-list-button");
-            
-            // Tu dodaj akcję przycisku, np. edycja karty
-            btn.setOnAction(e -> { 
-                System.out.println("Kliknięto element: " + currentElement.getFront());
+        if (current != null) {
+            DeckTitle.setText(current.getFront());
+            DeckDescription.setText(current.getDescription());
+
+            // 4. Dopiero teraz bezpiecznie pobieramy elementy
+            List<CompositeElement> elementList = current.getChildren();
+
+            for (CompositeElement currentElement : elementList) {
+                Button btn = new Button(currentElement.getType() + currentElement.getFront());
+                btn.getStyleClass().add("deck-list-button");
+                
+                Command openCommand;
+                
+                if (currentElement instanceof Deck){
+                    openCommand = new OpenDeckCommand((Deck) currentElement);
+                }
+                else {
+                    openCommand = new OpenFlashcardCommand((Flashcard) currentElement);
+                }
+
+            // 2. W akcji przycisku po prostu wywołujesz execute()
+            btn.setOnAction(e -> {
+                openCommand.execute();
             });
 
-            vbox.getChildren().add(btn);
+                vbox.getChildren().add(btn);
+            }
+        } else {
+            App.switchView("MainMenu");
         }
-    } else {
-        // Obsługa błędu - np. gdy nie wybrano talii
-        DeckTitle.setText("Błąd: Nie wybrano talii");
-        System.err.println("DeckManager zwrócił null!");
     }
-}
     
     @FXML
     private void goToCreateDeck() throws IOException {
-        App.setRoot("CreateElement");
+        App.setRoot("CreateDeck");
+    }
+    
+    @FXML
+    private void goToCreateFlashcard() throws IOException {
+        App.switchView("CreateFlashcard");
     }
 
 }

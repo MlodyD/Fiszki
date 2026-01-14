@@ -2,9 +2,10 @@ package swagerzy.Model;
 
 import swagerzy.Model.factories.DeckFactory;
 import swagerzy.Model.composite.Deck;
-import swagerzy.Model.composite.CompositeElement;
 import java.util.ArrayList;
 import java.util.List;
+import swagerzy.Model.composite.Flashcard;
+import swagerzy.Model.factories.TextFlashcardFactory;
 
 public class DeckManager {
     private static DeckManager instance;
@@ -25,9 +26,22 @@ public class DeckManager {
     //logic
     
     public void createDeck(String deckName, String deckDescription){
+        
         DeckFactory factory = new DeckFactory();
         Deck deck = factory.CreateDeck(deckName, deckDescription);
-        decks.add(deck);
+        
+        if (currentDeck == null){
+            decks.add(deck);
+        }
+        else {
+            currentDeck.addChild(deck);
+        }
+    }
+    
+    public void createTextFlashcard(String question, String answer){
+        TextFlashcardFactory factory = new TextFlashcardFactory();
+        Flashcard card = factory.CreateFlashcard(question, answer);
+        this.currentDeck.addChild(card);
     }
     
     public List<Deck> getDecks(){

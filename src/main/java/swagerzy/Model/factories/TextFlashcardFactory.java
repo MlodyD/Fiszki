@@ -8,9 +8,8 @@ import swagerzy.Model.composite.TextFlashcard;
  */
 public class TextFlashcardFactory {
     
-    public TextFlashcard CreateCompositeElement(){
-        TextFlashcard flashcard = new TextFlashcard();
-        return flashcard;
+    public TextFlashcard CreateFlashcard(String question, String answer){
+        return new TextFlashcard(question, answer);
     }
     
 }

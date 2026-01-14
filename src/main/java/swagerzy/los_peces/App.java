@@ -23,7 +23,7 @@ public class App extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TitlePage.fxml"));
         Parent root = loader.load();
 
-        scene = new Scene(root, 640, 480);
+        scene = new Scene(root, 800, 600);
         stage.setScene(scene);
         stage.setTitle("La App de Peces");
         stage.show();

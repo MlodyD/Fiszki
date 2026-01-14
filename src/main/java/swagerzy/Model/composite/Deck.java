@@ -44,6 +44,22 @@ public class Deck implements CompositeElement {
         this.children = flashcards;
     }
     
+    public String getDescription(){
+        return this.deckDescription;
+    }
+    
+    public void setDescription(String desc){
+        this.deckDescription = desc;
+    }
+    
+    public String getType(){
+        return "Baraja: ";
+    }
+    
+    public void addChild(CompositeElement child){
+        this.children.add(child);
+    }
+    
     public void addFlashcard(Flashcard flashcard){
         this.children.add(flashcard);
     }

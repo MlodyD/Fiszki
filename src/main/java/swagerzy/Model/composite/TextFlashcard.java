@@ -17,6 +17,12 @@ public class TextFlashcard extends Flashcard {
     private String question;
     private String anwser;
     
+    public TextFlashcard(String q, String a){
+        this.question = q;
+        this.anwser = a;
+        this.id = java.util.UUID.randomUUID().toString();
+    }
+    
     @Override
     public String getFront() {
         return question;
@@ -36,6 +42,10 @@ public class TextFlashcard extends Flashcard {
 
     public void setAnwser(String anwser) {
         this.anwser = anwser;
+    }
+    
+    public String getType(){
+        return "Pez: ";
     }
 
 }

@@ -33,7 +33,7 @@ public class MainMenuController extends Controller implements Initializable {
         
         
         for (Deck currentDeck : decksList) {
-            Button btn = new Button(currentDeck.getFront());
+            Button btn = new Button(currentDeck.getType() + currentDeck.getFront());
             
             btn.getStyleClass().add("deck-list-button");
 

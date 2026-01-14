@@ -8,4 +8,5 @@ public interface CompositeElement {
     public CompositeElement getParent();
     public String getFront();
     public String getId();
+    public String getType();
 }

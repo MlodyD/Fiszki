@@ -1,8 +1,10 @@
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/los_peces/DeckViewController.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/Model/factories/DeckFactory.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/Model/command/OpenDeckCommand.java
+/Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/los_peces/FXMLController.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/los_peces/TitlePageController.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/los_peces/MainMenuController.java
+/Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/los_peces/CreateFlashcardController.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/Model/composite/ImageFlashcard.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/los_peces/CreateDeckController.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/Model/composite/Deck.java
@@ -12,6 +14,7 @@
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/Model/composite/Flashcard.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/Model/factories/TextFlashcardFactory.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/los_peces/Controller.java
+/Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/Model/command/OpenFlashcardCommand.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/module-info.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/Model/composite/CompositeElement.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/Model/command/Command.java
