@@ -11,6 +11,7 @@ public class DeckManager {
     private static DeckManager instance;
     private List<Deck> decks;
     private Deck currentDeck;
+    private Flashcard currentFlashcard;
     
     private DeckManager() {
         this.decks = new ArrayList<>();
@@ -28,7 +29,7 @@ public class DeckManager {
     public void createDeck(String deckName, String deckDescription){
         
         DeckFactory factory = new DeckFactory();
-        Deck deck = factory.CreateDeck(deckName, deckDescription);
+        Deck deck = factory.CreateDeck(deckName, deckDescription, currentDeck);
         
         if (currentDeck == null){
             decks.add(deck);
@@ -40,7 +41,7 @@ public class DeckManager {
     
     public void createTextFlashcard(String question, String answer){
         TextFlashcardFactory factory = new TextFlashcardFactory();
-        Flashcard card = factory.CreateFlashcard(question, answer);
+        Flashcard card = factory.CreateFlashcard(question, answer, currentDeck);
         this.currentDeck.addChild(card);
     }
     
@@ -54,6 +55,14 @@ public class DeckManager {
 
     public void setCurrentDeck(Deck currentDeck) {
         this.currentDeck = currentDeck;
+    }
+
+    public Flashcard getCurrentFlashcard() {
+        return currentFlashcard;
+    }
+
+    public void setCurrentFlashcard(Flashcard currentFlashcard) {
+        this.currentFlashcard = currentFlashcard;
     }
     
 }

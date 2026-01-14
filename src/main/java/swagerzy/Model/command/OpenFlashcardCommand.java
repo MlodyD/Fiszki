@@ -22,10 +22,9 @@ public class OpenFlashcardCommand implements Command{
 
     @Override
     public void execute(){
-        //TODO
         DeckManager manager = DeckManager.getInstance();
-        //manager.setCurrentDeck(flashcard);
+        manager.setCurrentFlashcard(flashcard);
         
-        App.switchView("DeckView");
+        App.switchView("FlashcardView");
     }
 }

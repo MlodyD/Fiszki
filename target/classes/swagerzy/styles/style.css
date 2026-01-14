@@ -11,27 +11,25 @@
 }
 
 /* --- NAGŁÓWKI (Label) --- */
-/* Używane np. w tytułach ekranów */
 .label-header {
     -fx-text-fill: #38BDF8; /* Neonowy jasny błękit */
     -fx-font-size: 32px;
-    -fx-font-family: "AkayaKanadaka-Regular", "Segoe UI", sans-serif; /* Twoja czcionka */
+    -fx-font-family: "AkayaKanadaka-Regular", "Segoe UI", sans-serif;
     -fx-font-weight: 800;
-    /* Efekt świecenia (Glow) */
     -fx-effect: dropshadow(gaussian, rgba(56, 189, 248, 0.4), 10, 0.5, 0, 0);
     -fx-padding: 20 0 10 0;
 }
 
 /* --- ZWYKŁY TEKST --- */
 .label {
-    -fx-text-fill: #E2E8F0; /* Złamana biel, czytelna na ciemnym */
+    -fx-text-fill: #E2E8F0;
 }
 
 /* =============================================================================
-   PRZYCISKI GŁÓWNE (np. "Empezar", "Crear Baraja")
+   PRZYCISKI GŁÓWNE
    ============================================================================= */
 .button {
-    -fx-background-color: #0EA5E9; /* Nasycony błękit */
+    -fx-background-color: #0EA5E9;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 16px;
@@ -39,77 +37,56 @@
     -fx-padding: 10 25 10 25;
     -fx-cursor: hand;
     -fx-border-color: transparent;
-    /* Płynne przejście koloru nie działa w JavaFX CSS natywnie, 
-       ale efekt hover niżej załatwia sprawę */
 }
 
 .button:hover {
-    -fx-background-color: #38BDF8; /* Jaśniejszy, świecący */
-    /* Mocna poświata (Neon Glow) */
+    -fx-background-color: #38BDF8;
     -fx-effect: dropshadow(gaussian, rgba(56, 189, 248, 0.6), 15, 0, 0, 0);
-    -fx-scale-x: 1.02; /* Lekkie powiększenie */
+    -fx-scale-x: 1.02;
     -fx-scale-y: 1.02;
 }
 
 .button:pressed {
-    -fx-background-color: #0284C7; /* Ciemniejszy przy kliknięciu */
-    -fx-effect: none; /* Zgaszenie poświaty */
+    -fx-background-color: #0284C7;
+    -fx-effect: none;
     -fx-scale-x: 0.98;
     -fx-scale-y: 0.98;
 }
 
 /* =============================================================================
    LISTA TALII (VBox w ScrollPane)
-   To są te przyciski generowane w pętli w Javie
    ============================================================================= */
-
 .deck-list-button {
-    /* Rozciąganie na całą szerokość listy! */
     -fx-max-width: infinity; 
-    -fx-pref-height: 55px; /* Wysokość wiersza */
-    
-    /* Wygląd "wtopiony" w tło */
+    -fx-pref-height: 55px;
     -fx-background-color: transparent;
-    -fx-background-radius: 0; /* Prostokątne, jak wiersze w tabeli */
-    
-    /* Tekst */
+    -fx-background-radius: 0;
     -fx-text-fill: #E2E8F0;
     -fx-font-size: 18px;
     -fx-font-weight: bold;
-    -fx-alignment: CENTER_LEFT; /* Tekst do lewej */
-    -fx-padding: 0 20 0 20;     /* Marginesy tekstu */
-    
-    /* Kursor */
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 20 0 20;
     -fx-cursor: hand;
-    
-    /* Linia oddzielająca (zamiast ramki) */
-    -fx-border-color: #1E293B; /* Jaśniejszy granat */
-    -fx-border-width: 0 0 1 0; /* Tylko na dole */
+    -fx-border-color: #1E293B;
+    -fx-border-width: 0 0 1 0;
 }
 
 .deck-list-button:hover {
-    /* Podświetlenie wiersza */
-    -fx-background-color: #1E293B; /* Kolor "Ciemna Woda" */
-    -fx-text-fill: #38BDF8; /* Neonowy tekst */
-    
-    /* Delikatny glow całego paska */
+    -fx-background-color: #1E293B;
+    -fx-text-fill: #38BDF8;
     -fx-effect: dropshadow(gaussian, rgba(56, 189, 248, 0.1), 10, 0, 0, 0);
-    
-    /* Resetujemy skalowanie zwykłego przycisku, żeby lista nie skakała */
     -fx-scale-x: 1.0;
     -fx-scale-y: 1.0;
 }
 
 .deck-list-button:pressed {
-    -fx-background-color: #0F172A; /* Wciśnięcie "w głąb" */
+    -fx-background-color: #0F172A;
     -fx-text-fill: #0284C7;
 }
 
 /* =============================================================================
-   SCROLLPANE (Pełna przezroczystość)
+   SCROLLPANE
    ============================================================================= */
-
-/* Usuwamy szare tła i ramki z kontenera scrollowania */
 .scroll-pane, 
 .scroll-pane .viewport, 
 .scroll-pane .content {
@@ -118,27 +95,25 @@
     -fx-border-width: 0;
 }
 
-/* Stylizacja paska przewijania (Scrollbar), żeby pasował do motywu */
 .scroll-bar:vertical {
     -fx-background-color: transparent;
-    -fx-pref-width: 12px; /* Wąski pasek */
+    -fx-pref-width: 12px;
 }
 
 .scroll-bar:vertical .track {
-    -fx-background-color: transparent; /* Tło paska niewidoczne */
+    -fx-background-color: transparent;
 }
 
 .scroll-bar:vertical .thumb {
-    -fx-background-color: #334155; /* Szary suwak */
+    -fx-background-color: #334155;
     -fx-background-radius: 10px;
     -fx-background-insets: 2px;
 }
 
 .scroll-bar:vertical .thumb:hover {
-    -fx-background-color: #475569; /* Jaśniejszy po najechaniu */
+    -fx-background-color: #475569;
 }
 
-/* Ukrywamy przyciski góra/dół na pasku */
 .scroll-bar .increment-button, 
 .scroll-bar .decrement-button {
     -fx-visible: false;
@@ -146,30 +121,95 @@
 }
 
 /* =============================================================================
-   FORMULARZE (Inputy: TextField, TextArea)
+   FORMULARZE (TextField, TextArea)
    ============================================================================= */
-
 .text-field, .text-area {
-    -fx-background-color: #0F172A; /* Tło takie jak apka */
-    -fx-border-color: #475569;     /* Szara ramka */
+    -fx-background-color: #0F172A;
+    -fx-border-color: #475569;
     -fx-border-width: 1px;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-    
-    -fx-text-fill: #F1F5F9;        /* Jasny tekst */
-    -fx-prompt-text-fill: #64748B; /* Ciemniejszy placeholder */
+    -fx-text-fill: #F1F5F9;
+    -fx-prompt-text-fill: #64748B;
     -fx-font-size: 16px;
     -fx-padding: 10;
 }
 
 .text-field:focused, .text-area:focused {
-    -fx-border-color: #38BDF8; /* Neonowa ramka przy pisaniu */
-    -fx-background-color: #162036; /* Minimalnie jaśniejsze tło */
-    /* Poświata inputa */
+    -fx-border-color: #38BDF8;
+    -fx-background-color: #162036;
     -fx-effect: dropshadow(gaussian, rgba(56, 189, 248, 0.3), 8, 0, 0, 0);
 }
 
-/* Usuwamy brzydkie domyślne tło TextArea wewnątrz */
 .text-area .content {
     -fx-background-color: transparent;
+}
+
+/* =============================================================================
+   FISZKI (FLASHCARDS) - NOWE STYLE
+   ============================================================================= */
+
+/* Kontener całego widoku fiszki */
+.flashcard-container {
+    -fx-background-color: #0F172A; /* Jak reszta apki */
+}
+
+/* StackPane (ten, którym obracamy) */
+.card-stack {
+    -fx-cursor: hand; /* Kursor wskazuje, że można kliknąć */
+}
+
+/* --- PRZÓD FISZKI (biała/jasnoszara karta) --- */
+.flashcard-front {
+    -fx-background-color: #1E293B; /* Ciemna woda */
+    -fx-background-radius: 16;
+    -fx-border-color: #38BDF8; /* Neonowa ramka */
+    -fx-border-width: 2;
+    -fx-border-radius: 16;
+    -fx-padding: 30;
+    -fx-effect: dropshadow(gaussian, rgba(56, 189, 248, 0.25), 20, 0.3, 0, 5);
+}
+
+/* --- TYŁ FISZKI (cieplejszy odcień, np. podświetlony) --- */
+.flashcard-back {
+    -fx-background-color: #0C4A6E; /* Ciemny niebieski (głębszy ton) */
+    -fx-background-radius: 16;
+    -fx-border-color: #0EA5E9; /* Jaśniejszy niebieski */
+    -fx-border-width: 2;
+    -fx-border-radius: 16;
+    -fx-padding: 30;
+    -fx-effect: dropshadow(gaussian, rgba(14, 165, 233, 0.3), 20, 0.4, 0, 5);
+}
+
+/* --- Mały napis na górze karty ("SŁÓWKO" / "TŁUMACZENIE") --- */
+.card-label-small {
+    -fx-text-fill: #64748B; /* Przyciemniony szary */
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 10 0;
+}
+
+/* --- Duży tekst na przodzie (słówko) --- */
+.card-text-front {
+    -fx-text-fill: #F1F5F9; /* Jasna biel */
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}
+
+/* --- Duży tekst na tyle (tłumaczenie) --- */
+.card-text-back {
+    -fx-text-fill: #7DD3FC; /* Jasnoniebieska poświata */
+    -fx-font-size: 32px;
+    -fx-font-style: italic;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}
+
+/* --- Podpowiedź pod kartą ("Kliknij w kartę...") --- */
+.hint-text {
+    -fx-text-fill: #64748B; /* Ciemny szary */
+    -fx-font-size: 14px;
+    -fx-font-style: italic;
 }

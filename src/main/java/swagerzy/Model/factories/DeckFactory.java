@@ -1,5 +1,6 @@
 package swagerzy.Model.factories;
 
+import swagerzy.Model.composite.CompositeElement;
 import swagerzy.Model.composite.Deck;
 
 /**
@@ -10,6 +11,10 @@ public class DeckFactory {
     
     public Deck CreateDeck(String deckName, String deckDescription){
         return new Deck(deckName, deckDescription);
+    }
+    
+    public Deck CreateDeck(String deckName, String deckDescription, CompositeElement parent){
+        return new Deck(deckName, deckDescription, parent);
     }
     
 }

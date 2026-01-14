@@ -12,8 +12,6 @@ import swagerzy.Model.composite.Flashcard;
  */
 public class TextFlashcard extends Flashcard {
     
-     
-    private String id;
     private String question;
     private String anwser;
     
@@ -21,6 +19,13 @@ public class TextFlashcard extends Flashcard {
         this.question = q;
         this.anwser = a;
         this.id = java.util.UUID.randomUUID().toString();
+    }
+    
+    public TextFlashcard(String q, String a, CompositeElement parent){
+        this.question = q;
+        this.anwser = a;
+        this.id = java.util.UUID.randomUUID().toString();
+        this.parent = parent;
     }
     
     @Override

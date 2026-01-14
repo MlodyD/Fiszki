@@ -19,6 +19,14 @@ public class Deck implements CompositeElement {
         this.children = new ArrayList<>();
     }
     
+    public Deck(String deckName, String deckDescription, CompositeElement parent){
+        this.deckName = deckName;
+        this.deckDescription = deckDescription;
+        this.id = java.util.UUID.randomUUID().toString();
+        this.children = new ArrayList<>();
+        this.parent = parent;
+    }
+    
     public Deck(){
         this.id = java.util.UUID.randomUUID().toString();
         this.children = new ArrayList<>();

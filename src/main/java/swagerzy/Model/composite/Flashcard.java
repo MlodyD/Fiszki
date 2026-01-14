@@ -4,9 +4,9 @@ import swagerzy.Model.composite.CompositeElement;
 
 public abstract class Flashcard implements CompositeElement {
      
-    private String id;
-    private int level; 
-    private CompositeElement parent;
+    protected String id;
+    protected int level; 
+    protected CompositeElement parent;
     
     public String getId(){
         return this.id;
@@ -14,6 +14,11 @@ public abstract class Flashcard implements CompositeElement {
     
     public Flashcard(){
         this.id = java.util.UUID.randomUUID().toString();
+    }
+    
+    @Override
+    public CompositeElement getParent(){
+        return this.parent;
     }
     
     
@@ -25,8 +30,4 @@ public abstract class Flashcard implements CompositeElement {
         this.level = level;
     }
     
-    @Override
-    public CompositeElement getParent(){
-        return this.parent;
-    }
 }

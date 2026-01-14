@@ -12,6 +12,7 @@ swagerzy/Model/composite/ImageFlashcard.class
 swagerzy/Model/composite/CompositeElement.class
 swagerzy/los_peces/App.class
 swagerzy/los_peces/DeckViewController.class
+swagerzy/los_peces/FlashcardViewController.class
 swagerzy/Model/composite/Flashcard.class
 swagerzy/los_peces/CreateFlashcardController.class
 swagerzy/Model/composite/TextFlashcard.class

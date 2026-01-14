@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import swagerzy.Model.DeckManager;
 
 /**
  * JavaFX App
@@ -21,6 +20,7 @@ public class App extends Application {
 
         // Twój loadFXML zwraca Parent/root
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TitlePage.fxml"));
+        
         Parent root = loader.load();
 
         scene = new Scene(root, 800, 600);
