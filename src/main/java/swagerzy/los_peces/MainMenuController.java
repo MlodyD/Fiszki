@@ -13,8 +13,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
-import swagerzy.Model.Deck;
+import swagerzy.Model.composite.Deck;
 import swagerzy.Model.DeckManager;
+import swagerzy.Model.command.Command;
+import swagerzy.Model.command.OpenDeckCommand;
 
 public class MainMenuController extends Controller implements Initializable {
 
@@ -29,15 +31,18 @@ public class MainMenuController extends Controller implements Initializable {
         this.deckManager = DeckManager.getInstance();
         List<Deck> decksList = deckManager.getDecks();
         
-        // W pętli for:
+        
         for (Deck currentDeck : decksList) {
-            Button btn = new Button(currentDeck.getDeckName());
-
-            // Dodaj TYLKO klasę CSS (nie rób tu żadnego setMaxWidth!)
+            Button btn = new Button(currentDeck.getFront());
+            
             btn.getStyleClass().add("deck-list-button");
 
-            // Akcja
-            btn.setOnAction(e -> { /* Twoja akcja */ });
+            Command openCommand = new OpenDeckCommand(currentDeck);
+
+            // 2. W akcji przycisku po prostu wywołujesz execute()
+            btn.setOnAction(e -> {
+                openCommand.execute();
+            });
 
             vbox.getChildren().add(btn);
         }

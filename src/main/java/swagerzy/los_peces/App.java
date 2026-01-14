@@ -28,15 +28,25 @@ public class App extends Application {
         stage.setTitle("La App de Peces");
         stage.show();
     }
-
-    static void setRoot(String fxml) throws IOException {
+    
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
+    
+    public static void switchView(String viewName) {
+        try {
+            setRoot(viewName);
+        } catch (IOException e) {
+            System.err.println("Błąd ładowania widoku: " + viewName);
+            e.printStackTrace(); // <--- DODAJ TĘ LINIĘ !!!
+        }
+    }
+
 
     private static Parent loadFXML(String fxml) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/swagerzy/los_peces/" + fxml + ".fxml"));
-    return fxmlLoader.load();
-}
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/swagerzy/los_peces/" + fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
 
 
 
