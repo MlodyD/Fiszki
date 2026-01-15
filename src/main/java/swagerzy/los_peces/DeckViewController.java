@@ -32,18 +32,14 @@ public class DeckViewController extends Controller implements Initializable {
     private Label DeckTitle;
     @FXML
     private Label DeckDescription;
+    @FXML
+    private Button backButton;
 
-    // ..
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
-        this.deckManager = DeckManager.getInstance();
-        
-        Deck current = deckManager.getCurrentDeck();
-
-        if (current != null) {
-            DeckTitle.setText(current.getFront());
+    
+    
+    public void createButtons(){
+        Deck current = DeckManager.getInstance().getCurrentDeck();
+        DeckTitle.setText(current.getFront());
             DeckDescription.setText(current.getDescription());
 
             // 4. Dopiero teraz bezpiecznie pobieramy elementy
@@ -69,6 +65,33 @@ public class DeckViewController extends Controller implements Initializable {
 
                 vbox.getChildren().add(btn);
             }
+    }
+    
+    public void changeBackButtonName(){
+        Deck current = DeckManager.getInstance().getCurrentDeck();
+        
+        if (current.getParent() != null)
+        {
+            backButton.setText("← " + current.getParent().getFront());
+        }
+        else {
+            backButton.setText("← " + "Main Menu");
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        
+        this.deckManager = DeckManager.getInstance();
+        
+        Deck current = deckManager.getCurrentDeck();
+
+        if (current != null) {
+            
+            createButtons();
+            changeBackButtonName();
+            
+            
         } else {
             App.switchView("MainMenu");
         }
@@ -84,4 +107,8 @@ public class DeckViewController extends Controller implements Initializable {
         App.switchView("CreateFlashcard");
     }
 
+    @FXML
+    private void goUp(){
+        DeckManager.getInstance().goUp();
+    }
 }

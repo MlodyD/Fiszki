@@ -12,11 +12,13 @@ import swagerzy.Model.DeckManager;
     
 import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
+import swagerzy.Model.composite.Deck;
 import swagerzy.Model.composite.TextFlashcard;
 
 
@@ -50,11 +52,14 @@ private boolean isFrontVisible = true;
     // To jest ten napis z tyłu, gdzie wstawisz tłumaczenie (np. "Cześć")
     @FXML
     private Label backText;
+    
+    @FXML
+    private Button backButton;
 
 
 
 
-public void flipCard() {
+    public void flipCard() {
     // 1. Wybierz, co obracamy (cały kontener albo konkretną stronę)
     // Najlepiej obracać cały StackPane, ale podmieniać zawartość w trakcie
     
@@ -106,8 +111,16 @@ public void flipCard() {
     firstHalf.play();
 }
 
+    public void changeBackButtonName(){
+        Deck current = DeckManager.getInstance().getCurrentDeck();
+
+        backButton.setText("← " + current.getFront());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        changeBackButtonName();
+        
         DeckManager deckManager = DeckManager.getInstance();
         
         TextFlashcard flashcard = (TextFlashcard) deckManager.getCurrentFlashcard();
@@ -115,5 +128,10 @@ public void flipCard() {
         frontText.setText(flashcard.getFront());
         backText.setText(flashcard.getAnwser());
     }    
+    
+    @FXML
+    public void goUp(){
+        DeckManager.getInstance().goUp();
+    }
     
 }

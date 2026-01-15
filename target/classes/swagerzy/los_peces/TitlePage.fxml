@@ -19,7 +19,7 @@
    <center>
       <VBox alignment="CENTER" spacing="20.0">
          <children>
-            <Label text="Los Peces">
+            <Label text="Los Peces" styleClass="label-header">
                <font>
                   <Font name="AkayaKanadaka-Regular" size="40.0" />
                </font>

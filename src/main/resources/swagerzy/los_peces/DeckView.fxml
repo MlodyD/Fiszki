@@ -16,13 +16,7 @@
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
             
-            <Label text="Los Peces" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-
-            <VBox alignment="CENTER" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+            <VBox alignment="CENTER" pickOnBounds="false" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
                <children>
                   
                   <Label fx:id="DeckTitle" text="DeckTitle">
@@ -42,6 +36,20 @@
                   <Insets bottom="10.0" />
                </padding>
             </VBox>
+
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#goUp" text="← Los Peces" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <style>
+                  -fx-background-color: transparent; 
+                  -fx-text-fill: #555555; 
+                  -fx-cursor: hand;
+                  -fx-border-color: #cccccc;
+                  -fx-border-radius: 5;
+                  -fx-padding: 5 10 5 10;
+               </style>
+            </Button>
             
          </children>
          <padding>

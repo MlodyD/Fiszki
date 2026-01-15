@@ -1,7 +1,11 @@
 swagerzy/los_peces/Controller.class
+swagerzy/Model/Adapter/FileReaders/CSVReader.class
 swagerzy/los_peces/TitlePageController.class
+swagerzy/los_peces/ImportDeckController.class
+swagerzy/Model/Adapter/DeckImporter.class
 swagerzy/Model/command/OpenDeckCommand.class
 swagerzy/Model/command/OpenFlashcardCommand.class
+swagerzy/Model/Adapter/JSONDeckImporter.class
 swagerzy/Model/composite/Deck.class
 swagerzy/Model/command/Command.class
 swagerzy/los_peces/MainMenuController.class
@@ -9,9 +13,11 @@ swagerzy/Model/factories/DeckFactory.class
 module-info.class
 swagerzy/los_peces/CreateDeckController.class
 swagerzy/Model/composite/ImageFlashcard.class
+swagerzy/Model/factories/DeckImporterFactory.class
 swagerzy/Model/composite/CompositeElement.class
 swagerzy/los_peces/App.class
 swagerzy/los_peces/DeckViewController.class
+swagerzy/Model/Adapter/CSVDeckImporter.class
 swagerzy/los_peces/FlashcardViewController.class
 swagerzy/Model/composite/Flashcard.class
 swagerzy/los_peces/CreateFlashcardController.class

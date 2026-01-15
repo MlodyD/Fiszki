@@ -16,6 +16,11 @@
             <artifactId>javafx-controls</artifactId>
             <version>21.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
         <!-- Wersja specyficzna dla Twojego Maca (Natywne biblioteki) -->
         <dependency>
             <groupId>org.openjfx</groupId>

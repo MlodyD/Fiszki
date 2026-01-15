@@ -47,7 +47,12 @@ public class CreateFlashcardController extends Controller implements Initializab
         }
         
         this.deckManager.createTextFlashcard(question, answer);
-        App.setRoot("MainMenu");
+        goBack();
+    }
+    
+    @FXML
+    private void goBack(){
+        DeckManager.getInstance().goToView();
     }
     
 }

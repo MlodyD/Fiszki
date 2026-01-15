@@ -44,7 +44,12 @@ public class CreateDeckController extends Controller implements Initializable {
         }
         
         this.deckManager.createDeck(name, description);
-        App.setRoot("MainMenu");
+        goBack();
+    }
+    
+    @FXML
+    private void goBack(){
+        DeckManager.getInstance().goToView();
     }
     
 }

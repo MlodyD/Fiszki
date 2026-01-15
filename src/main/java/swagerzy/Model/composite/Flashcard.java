@@ -6,7 +6,7 @@ public abstract class Flashcard implements CompositeElement {
      
     protected String id;
     protected int level; 
-    protected CompositeElement parent;
+    protected transient CompositeElement parent;
     
     public String getId(){
         return this.id;

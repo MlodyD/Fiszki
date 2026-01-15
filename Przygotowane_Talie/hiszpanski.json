@@ -1,0 +1,106 @@
+{
+  "front": "Hiszpański - Poziom A1",
+  "description": "Kompletny zestaw startowy dla początkujących. Zawiera słownictwo i podstawy gramatyki.",
+  "children": [
+    {
+      "front": "1. Podstawowe Zwroty",
+      "description": "Słowa niezbędne do przetrwania pierwszego dnia w Hiszpanii.",
+      "children": [
+        {
+          "front": "Cześć (na powitanie)",
+          "back": "Hola"
+        },
+        {
+          "front": "Dzień dobry (rano)",
+          "back": "Buenos días"
+        },
+        {
+          "front": "Dobry wieczór",
+          "back": "Buenas tardes"
+        },
+        {
+          "front": "Dziękuję bardzo",
+          "back": "Muchas gracias"
+        },
+        {
+          "front": "Nie rozumiem",
+          "back": "No entiendo"
+        },
+        {
+          "front": "Jak się masz?",
+          "back": "¿Cómo estás?"
+        }
+      ]
+    },
+    {
+      "front": "2. Jedzenie i Restauracja",
+      "description": "Słówka przydatne podczas zamawiania posiłków i zakupów.",
+      "children": [
+        {
+          "front": "Chleb",
+          "back": "El pan"
+        },
+        {
+          "front": "Woda",
+          "back": "El agua"
+        },
+        {
+          "front": "Piwo",
+          "back": "La cerveza"
+        },
+        {
+          "front": "Rachunek poproszę",
+          "back": "La cuenta, por favor"
+        },
+        {
+          "front": "2.1 Owoce i Warzywa",
+          "description": "Nazwy świeżych produktów z targu.",
+          "children": [
+            {
+              "front": "Jabłko",
+              "back": "La manzana"
+            },
+            {
+              "front": "Truskawka",
+              "back": "La fresa"
+            },
+            {
+              "front": "Pomarańcza",
+              "back": "La naranja"
+            },
+            {
+              "front": "Pomidor",
+              "back": "El tomate"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "front": "3. Gramatyka - Czasowniki",
+      "description": "Najważniejsze czasowniki nieregularne w bezokoliczniku.",
+      "children": [
+        {
+          "front": "Być (cecha stała, np. jestem Polakiem)",
+          "back": "Ser"
+        },
+        {
+          "front": "Być (stan, lokalizacja, np. jestem smutny)",
+          "back": "Estar"
+        },
+        {
+          "front": "Mieć",
+          "back": "Tener"
+        },
+        {
+          "front": "Robić",
+          "back": "Hacer"
+        },
+        {
+          "front": "Iść",
+          "back": "Ir"
+        }
+      ]
+    }
+  ]
+}

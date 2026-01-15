@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import swagerzy.Model.composite.Flashcard;
 import swagerzy.Model.factories.TextFlashcardFactory;
+import swagerzy.los_peces.App;
 
 public class DeckManager {
     private static DeckManager instance;
@@ -47,6 +48,33 @@ public class DeckManager {
     
     public List<Deck> getDecks(){
         return this.decks;
+    }
+    
+    public void goUp(){
+        if (currentFlashcard != null){
+            currentFlashcard = null;
+            goToView();
+        }
+        else{
+            if (currentDeck.getParent() != null){
+                this.currentDeck = (Deck) currentDeck.getParent();
+                goToView();
+            }
+            else{
+                currentDeck = null;
+                goToView();
+            }
+        }
+            
+    }
+    
+    public void goToView(){
+        if (this.currentDeck == null){
+            App.switchView("MainMenu");
+        }
+        else {
+            App.switchView("DeckView");
+        }
     }
 
     public Deck getCurrentDeck() {

@@ -9,7 +9,7 @@ public class Deck implements CompositeElement {
     private String deckName;
     private String deckDescription;
     private List<CompositeElement> children;
-    private CompositeElement parent;
+    private transient CompositeElement parent;
 
     
     public Deck(String deckName, String deckDescription){

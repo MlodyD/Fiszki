@@ -23,7 +23,7 @@ public class App extends Application {
         
         Parent root = loader.load();
 
-        scene = new Scene(root, 800, 600);
+        scene = new Scene(root, 1600, 1200);
         stage.setScene(scene);
         stage.setTitle("La App de Peces");
         stage.show();

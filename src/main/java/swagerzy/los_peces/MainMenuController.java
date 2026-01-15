@@ -52,5 +52,10 @@ public class MainMenuController extends Controller implements Initializable {
     private void goToCreateDeck() throws IOException {
         App.setRoot("CreateDeck");
     }
+    
+    @FXML
+    private void ImportDeck() throws IOException {
+        App.setRoot("ImportDeck");
+    }
 
 }
