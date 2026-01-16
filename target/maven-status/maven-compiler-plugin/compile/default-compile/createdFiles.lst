@@ -15,6 +15,7 @@ swagerzy/los_peces/CreateDeckController.class
 swagerzy/Model/composite/ImageFlashcard.class
 swagerzy/Model/factories/DeckImporterFactory.class
 swagerzy/Model/composite/CompositeElement.class
+swagerzy/Model/StorageService.class
 swagerzy/los_peces/App.class
 swagerzy/los_peces/DeckViewController.class
 swagerzy/Model/Adapter/CSVDeckImporter.class

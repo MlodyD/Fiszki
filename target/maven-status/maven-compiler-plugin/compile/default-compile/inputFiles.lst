@@ -14,6 +14,7 @@
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/los_peces/DeckViewController.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/Model/Adapter/JSONDeckImporter.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/los_peces/FXMLController.java
+/Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/Model/StorageService.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/los_peces/MainMenuController.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/Model/factories/DeckImporterFactory.java
 /Users/maciejdaszkiewicz/NetBeansProjects/Los_Peces/src/main/java/swagerzy/los_peces/FlashcardViewController.java

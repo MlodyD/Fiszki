@@ -4,7 +4,7 @@
  */
 package swagerzy.Model.composite;
 
-import swagerzy.Model.composite.Flashcard;
+import com.google.gson.annotations.SerializedName;
 
 /**
  *
@@ -12,19 +12,20 @@ import swagerzy.Model.composite.Flashcard;
  */
 public class TextFlashcard extends Flashcard {
     
+    @SerializedName("front")
     private String question;
+    
+    @SerializedName("back")
     private String anwser;
     
     public TextFlashcard(String q, String a){
         this.question = q;
         this.anwser = a;
-        this.id = java.util.UUID.randomUUID().toString();
     }
     
     public TextFlashcard(String q, String a, CompositeElement parent){
         this.question = q;
         this.anwser = a;
-        this.id = java.util.UUID.randomUUID().toString();
         this.parent = parent;
     }
     

@@ -50,6 +50,10 @@ public class DeckManager {
         return this.decks;
     }
     
+    public void setDecks(List<Deck> newDecks) {
+        this.decks = newDecks;
+    }
+    
     public void goUp(){
         if (currentFlashcard != null){
             currentFlashcard = null;

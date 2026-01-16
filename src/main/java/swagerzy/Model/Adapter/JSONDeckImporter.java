@@ -46,50 +46,52 @@ public class JSONDeckImporter implements DeckImporter {
      * Metoda REKURENCYJNA
      * Teraz przyjmuje parametr 'parent', aby przekazać go do konstruktora dziecka.
      */
+    /**
+     * Metoda REKURENCYJNA - wersja bezpieczna (odporna na brakujące pola)
+     */
     private CompositeElement parseElement(JsonObject json, CompositeElement parent) {
-        // Pobieramy "front" jako nazwę talii lub pytanie fiszki
-        String front = json.get("front").getAsString();
+        // Zabezpieczenie przed pustym obiektem
+        if (json == null) return null;
 
+        // 1. BEZPIECZNE POBIERANIE PÓL (To naprawia Twój błąd!)
+        // Używamy helpera (kod niżej) albo sprawdzamy .has()
+        String front = getSafeString(json, "front", "Bez nazwy");
+        String description = getSafeString(json, "description", "");
+        String back = getSafeString(json, "back", "");
+
+        // SPRAWDZENIE: Czy to Deck czy Fiszka?
         if (isDeck(json)) {
-            // --- TO JEST TALIA ---
-            
-            // 1. Pobierz opis (zabezpieczenie, jeśli go nie ma w JSON)
-            String description = "";
-            if (json.has("description")) {
-                description = json.get("description").getAsString();
-            }
-
-            // 2. Stwórz obiekt Deck przekazując rodzica (parent)
+            // --- To jest TALIA ---
             Deck deck = new Deck(front, description, parent);
             
-            // 3. Pobierz dzieci
-            JsonArray childrenJson = json.getAsJsonArray("children");
-            
-            // 4. Rekurencja dla dzieci
-            for (JsonElement childElement : childrenJson) {
-                JsonObject childObj = childElement.getAsJsonObject();
+            // Pobieramy tablicę dzieci (może być null, jeśli json jest uszkodzony)
+            if (json.has("children")) {
+                JsonArray childrenJson = json.getAsJsonArray("children");
                 
-                // WAŻNE: Tutaj przekazujemy 'deck' (tę talię, którą właśnie stworzyliśmy)
-                // jako rodzica dla jej dzieci!
-                CompositeElement component = parseElement(childObj, deck); 
-                
-                // Dodajemy dziecko do listy dzieci tej talii
-                deck.addChild(component);
+                for (JsonElement childElement : childrenJson) {
+                    JsonObject childObj = childElement.getAsJsonObject();
+                    CompositeElement component = parseElement(childObj, deck); // Rekurencja
+                    if (component != null) {
+                        deck.addChild(component);
+                    }
+                }
             }
             
             return deck;
 
         } else {
-            // --- TO JEST FISZKA ---
-            
-            String back = "";
-            if (json.has("back")) {
-                back = json.get("back").getAsString();
-            }
-            
-            // Tworzymy fiszkę przekazując rodzica
+            // --- To jest FISZKA ---
             return new TextFlashcard(front, back, parent);
         }
+    }
+
+    // --- METODA POMOCNICZA ---
+    // Zwraca wartość pola lub domyślny tekst, jeśli pola nie ma
+    private String getSafeString(JsonObject json, String key, String defaultValue) {
+        if (json.has(key) && !json.get(key).isJsonNull()) {
+            return json.get(key).getAsString();
+        }
+        return defaultValue;
     }
 
     // Pomocnicza metoda sprawdzająca typ

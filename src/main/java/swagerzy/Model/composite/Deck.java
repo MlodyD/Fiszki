@@ -1,13 +1,19 @@
 package swagerzy.Model.composite;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Deck implements CompositeElement {
     
-    private String id;
+    protected transient final String id = java.util.UUID.randomUUID().toString();
+    
+    @SerializedName("front")
     private String deckName;
+    
+    @SerializedName("description")
     private String deckDescription;
+    
     private List<CompositeElement> children;
     private transient CompositeElement parent;
 
@@ -15,20 +21,17 @@ public class Deck implements CompositeElement {
     public Deck(String deckName, String deckDescription){
         this.deckName = deckName;
         this.deckDescription = deckDescription;
-        this.id = java.util.UUID.randomUUID().toString();
         this.children = new ArrayList<>();
     }
     
     public Deck(String deckName, String deckDescription, CompositeElement parent){
         this.deckName = deckName;
         this.deckDescription = deckDescription;
-        this.id = java.util.UUID.randomUUID().toString();
         this.children = new ArrayList<>();
         this.parent = parent;
     }
     
     public Deck(){
-        this.id = java.util.UUID.randomUUID().toString();
         this.children = new ArrayList<>();
     }
     
@@ -76,4 +79,7 @@ public class Deck implements CompositeElement {
         return this.parent;
     }
     
+    public void setParent(CompositeElement element){
+        this.parent = element;
+    }
 }

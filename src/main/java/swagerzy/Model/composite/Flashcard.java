@@ -4,7 +4,7 @@ import swagerzy.Model.composite.CompositeElement;
 
 public abstract class Flashcard implements CompositeElement {
      
-    protected String id;
+    protected transient final String id = java.util.UUID.randomUUID().toString();
     protected int level; 
     protected transient CompositeElement parent;
     
@@ -13,7 +13,6 @@ public abstract class Flashcard implements CompositeElement {
     }
     
     public Flashcard(){
-        this.id = java.util.UUID.randomUUID().toString();
     }
     
     @Override
