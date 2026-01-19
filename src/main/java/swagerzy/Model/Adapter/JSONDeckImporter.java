@@ -24,53 +24,39 @@ public class JSONDeckImporter implements DeckImporter {
 
     @Override
     public Deck importDeck(File file) throws Exception {
-        // 1. Adaptee (Gson) czyta plik i tworzy drzewo obiektów JSON
+        // Gson (Adaptee) reads a file and creates a tree of JSON objects
         try (FileReader reader = new FileReader(file)) {
             
-            // Parsujemy plik do obiektu JsonObject
+            // Parsing the file to the JsonObject
             JsonObject rootObject = gson.fromJson(reader, JsonObject.class);
 
-            // 2. Logika Adaptacji
             if (isDeck(rootObject)) {
-                // Rozpoczynamy parsowanie od korzenia.
-                // Korzeń importowanej talii nie ma rodzica (dlatego null), 
-                // zostanie on ewentualnie dodany do rodzica w kontrolerze po imporcie.
                 return (Deck) parseElement(rootObject, null);
             } else {
-                throw new IllegalArgumentException("Główny element JSON musi być talią (mieć children)!");
+                throw new IllegalArgumentException("Main JSON element has to be a deck (have children)!");
             }
         }
     }
 
-    /**
-     * Metoda REKURENCYJNA
-     * Teraz przyjmuje parametr 'parent', aby przekazać go do konstruktora dziecka.
-     */
-    /**
-     * Metoda REKURENCYJNA - wersja bezpieczna (odporna na brakujące pola)
-     */
     private CompositeElement parseElement(JsonObject json, CompositeElement parent) {
-        // Zabezpieczenie przed pustym obiektem
+        // Protection against an empty object
         if (json == null) return null;
 
-        // 1. BEZPIECZNE POBIERANIE PÓL (To naprawia Twój błąd!)
-        // Używamy helpera (kod niżej) albo sprawdzamy .has()
         String front = getSafeString(json, "front", "Bez nazwy");
         String description = getSafeString(json, "description", "");
         String back = getSafeString(json, "back", "");
 
-        // SPRAWDZENIE: Czy to Deck czy Fiszka?
+        // Checking if it's a deck or a flashcard
         if (isDeck(json)) {
-            // --- To jest TALIA ---
+            // deck
             Deck deck = new Deck(front, description, parent);
-            
-            // Pobieramy tablicę dzieci (może być null, jeśli json jest uszkodzony)
+
             if (json.has("children")) {
                 JsonArray childrenJson = json.getAsJsonArray("children");
                 
                 for (JsonElement childElement : childrenJson) {
                     JsonObject childObj = childElement.getAsJsonObject();
-                    CompositeElement component = parseElement(childObj, deck); // Rekurencja
+                    CompositeElement component = parseElement(childObj, deck); // recursion
                     if (component != null) {
                         deck.addChild(component);
                     }
@@ -80,13 +66,11 @@ public class JSONDeckImporter implements DeckImporter {
             return deck;
 
         } else {
-            // --- To jest FISZKA ---
+            // flashcard
             return new TextFlashcard(front, back, parent);
         }
     }
 
-    // --- METODA POMOCNICZA ---
-    // Zwraca wartość pola lub domyślny tekst, jeśli pola nie ma
     private String getSafeString(JsonObject json, String key, String defaultValue) {
         if (json.has(key) && !json.get(key).isJsonNull()) {
             return json.get(key).getAsString();
@@ -94,7 +78,6 @@ public class JSONDeckImporter implements DeckImporter {
         return defaultValue;
     }
 
-    // Pomocnicza metoda sprawdzająca typ
     private boolean isDeck(JsonObject json) {
         return json.has("children");
     }

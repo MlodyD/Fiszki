@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="500.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="swagerzy.las_fichas.CreateFlashcardController">
+
+   <center>
+      <VBox alignment="CENTER" maxWidth="400.0" spacing="15.0">
+         <children>
+            <Label text="Crear Ficha Nueva">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+            
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label text="Pregunta (Texto)">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="questionField" promptText="Escribe la pregunta..." />
+               </children>
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="8.0" style="-fx-border-color: #ddd; -fx-border-radius: 5; -fx-padding: 10;">
+               <children>
+                  <Label text="O selecciona una Imagen">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Button onAction="#handleSelectImage" text="Elegir archivo..." />
+                        <Label fx:id="fileNameLabel" text="Sin archivo" textFill="#777777" />
+                     </children>
+                  </HBox>
+                  <ImageView fx:id="imagePreview" fitHeight="80.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label text="Respuesta">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="answerField" prefHeight="80.0" promptText="Escribe la respuesta..." wrapText="true" />
+               </children>
+            </VBox>
+
+            <HBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <Button cancelButton="true" onAction="#goBack" style="-fx-background-color: #888888; -fx-text-fill: white;" text="Cancelar">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button defaultButton="true" onAction="#createFlashcard" text="Crear Ficha">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>

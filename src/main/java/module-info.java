@@ -3,11 +3,10 @@ module swagerzy.los_peces {
     requires javafx.fxml;
     requires java.base;
     requires com.google.gson;
-    opens swagerzy.los_peces to javafx.fxml;
-    exports swagerzy.los_peces;
+    opens swagerzy.las_fichas to javafx.fxml;
+    exports swagerzy.las_fichas;
     
-    // --- DODAJ TĘ LINIĘ: ---
-    // Otwieramy pakiet z modelem (Deck, Flashcard) dla Gsona, żeby mógł czytać prywatne pola
-    opens swagerzy.Model.composite to com.google.gson;
-    // -----------------------
+    opens swagerzy.Model.composite to com.google.gson, javafx.base;
+    opens swagerzy.Model.memento to com.google.gson;
+    opens swagerzy.Model to com.google.gson;
 }

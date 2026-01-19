@@ -25,39 +25,31 @@ public class CSVDeckImporter implements DeckImporter {
         String deckName = file.getName().replace(".csv", "");
         Deck deck = new Deck(deckName,"");
 
-        // 3. LOGIKA PARSOWANIA
+        // Parsing logic
         int lineNumber = 0;
         for (String line : lines) {
             lineNumber++;
             
-            // A. Dzielimy linię po średniku
-            // Limit -1 sprawia, że puste stringi też są brane pod uwagę
+            // Splitting with ";", -1 so that the empty strings are also considered
             String[] parts = line.split(";", -1);
 
-            // B. Sprawdzamy poprawność danych
+            // CHecking if data is correct
             if (parts.length < 2) {
-                System.err.println("Pominięto linię " + lineNumber + ": Nieprawidłowy format (brak średnika?) -> " + line);
-                continue; // Skocz do następnej linii
+                continue;
             }
 
-            // C. Wyciąganie danych i czyszczenie białych znaków (spacji na końcach)
+            // Cleaning spaces at the end
             String front = parts[0].trim();
             String back = parts[1].trim();
 
-            // D. Zabezpieczenie przed pustymi fiszkami
+            // Protection against empty flashcards
             if (front.isEmpty() && back.isEmpty()) {
                 continue;
             }
 
-            // E. Tworzenie obiektu domenowego (Twoja klasa Flashcard)
             TextFlashcard card = new TextFlashcard(front, back);
-            
-            // F. Dodanie do talii
             deck.addFlashcard(card);
-        }
-
-        System.out.println("Zaimportowano talię: " + deckName + " (" + deck.getChildren().size() + " kart)");
-        
+        }     
         return deck;
     }
 }

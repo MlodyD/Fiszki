@@ -1,0 +1,8 @@
+¿Qué hora es?;What time is it?
+Tengo hambre;I am hungry
+Me gusta;I like it
+No entiendo;I do not understand
+¿Dónde está?;Where is it?
+¡Salud!;Cheers!
+Mucho gusto;Nice to meet you
+¡Vámonos!;Let's go!

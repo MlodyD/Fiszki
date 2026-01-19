@@ -1,0 +1,32 @@
+{
+  "front": "Vocabulario de Peces",
+  "description": "Una baraja para aprender nombres de peces y términos relacionados.",
+  "children": [
+    {
+      "front": "Tiburon",
+      "back": "Shark"
+    },
+    {
+      "front": "Ballena",
+      "back": "Whale"
+    },
+    {
+      "front": "Pez Espada",
+      "back": "Swordfish"
+    },
+    {
+      "front": "Sub-Baraja de Arrecife",
+      "description": "Peces que viven en el arrecife de coral.",
+      "children": [
+        {
+          "front": "Pez Payaso",
+          "back": "Clownfish"
+        },
+        {
+          "front": "Pez Cirujano",
+          "back": "Surgeonfish"
+        }
+      ]
+    }
+  ]
+}

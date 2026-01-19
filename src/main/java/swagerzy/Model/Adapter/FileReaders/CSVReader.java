@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-// To jest klasa "Adaptee" - ona umie czytać plik, ale nie zwraca Talii, tylko Stringi
+// Adaptee class, it can read a file and returns Strings, not decks
 public class CSVReader {
     
     public List<String> readLines(File file) throws Exception {

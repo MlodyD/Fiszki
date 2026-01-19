@@ -2,80 +2,139 @@ package swagerzy.Model;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonObject;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import swagerzy.Model.Adapter.JSONDeckImporter;
 import swagerzy.Model.composite.CompositeElement;
 import swagerzy.Model.composite.Deck;
+import swagerzy.Model.composite.Flashcard;
+import swagerzy.Model.composite.ImageFlashcard;
+import swagerzy.Model.composite.TextFlashcard;
+import swagerzy.Model.memento.StudySessionMemento;
 
 public class StorageService {
     
-    private static final String DIR_NAME = ".los_peces";
-    private static final String FILE_NAME = "library.json";
+    private static final String DIR_NAME = ".las_fichas";
+    private static final String LIBRARY_FILE = "library.json";
+    private static final String SESSION_FILE = "session.json";
+    private final Gson gson;
 
-    private File getLibraryFile() {
+    public StorageService() {
+        // Initializing our JSON engine
+        this.gson = getGson();
+    }
+    
+    // Returns a path to the application folder in users home folder
+    private File getAppDataDir() {
         String userHome = System.getProperty("user.home");
         File dir = new File(userHome, DIR_NAME);
-        if (!dir.exists()) dir.mkdirs();
-        return new File(dir, FILE_NAME);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        return dir;
     }
 
+    // Logic of a library (Composite)
     public void saveLibrary(List<Deck> topLevelDecks) {
-        File file = getLibraryFile();
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
+        File file = new File(getAppDataDir(), LIBRARY_FILE);
+        
+        // Creating a virtual box to save all decks in one file
         Deck virtualRoot = new Deck("LIBRARY_ROOT", "Storage Container", null);
-
         for (Deck d : topLevelDecks) {
             virtualRoot.addChild(d);
         }
 
         try (FileWriter writer = new FileWriter(file)) {
             gson.toJson(virtualRoot, writer);
-            System.out.println("Zapisano bibliotekę (" + topLevelDecks.size() + " talii) do pliku.");
         } catch (IOException e) {
-            System.err.println("Błąd zapisu: " + e.getMessage());
         }
     }
 
-    /**
-     * WCZYTYWANIE: Zwraca Listę Talii (dla DeckManagera)
-     */
     public List<Deck> loadLibrary() {
-        File file = getLibraryFile();
+        File file = new File(getAppDataDir(), LIBRARY_FILE);
 
-        // Domyślnie pusta lista
         if (!file.exists()) {
             return new ArrayList<>();
         }
 
-        try {
-            JSONDeckImporter importer = new JSONDeckImporter();
+        try (FileReader reader = new FileReader(file)){
+ 
+            Deck loadedRoot = gson.fromJson(reader, Deck.class);
             
-            // 1. Wczytujemy Wirtualny Root z pliku
-            Deck loadedRoot = importer.importDeck(file);
-            
-            // 2. Wyciągamy z niego "wnętrzności" (czyli Twoje talie)
             List<Deck> resultList = new ArrayList<>();
-            
-            for (CompositeElement child : loadedRoot.getChildren()) {
-                if (child instanceof Deck) {
-                    Deck d = (Deck) child;
-                    // Resetujemy rodzica na null, bo w DeckManagerze
-                    // talie najwyższego poziomu nie mają rodzica.
-                    d.setParent((Deck) null); 
-                    resultList.add(d);
+            if (loadedRoot != null && loadedRoot.getChildren() != null) {
+                for (CompositeElement child : loadedRoot.getChildren()) {
+                    if (child instanceof Deck) {
+                        Deck d = (Deck) child;
+                        d.setParent(null); // Main decks don't have parents
+                        resultList.add(d);
+                    }
                 }
             }
-            
             return resultList;
-
         } catch (Exception e) {
-            System.err.println("Błąd wczytywania: " + e.getMessage());
-            return new ArrayList<>(); // Zwracamy pustą listę w razie błędu
+            return new ArrayList<>();
         }
+    }
+
+    // Session logic (Memento)
+    public void saveSessionMemento(StudySessionMemento memento) {
+        File file = new File(getAppDataDir(), SESSION_FILE);
+        try (FileWriter writer = new FileWriter(file)) {
+            gson.toJson(memento, writer);
+        } catch (IOException e) {
+        }
+    }
+
+    public StudySessionMemento loadSessionMemento() {
+        File file = new File(getAppDataDir(), SESSION_FILE);
+        if (!file.exists()) {
+            return null;
+        }
+        
+        try (FileReader reader = new FileReader(file)) {
+            return gson.fromJson(reader, StudySessionMemento.class);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+    
+    public static Gson getGson() {
+        GsonBuilder builder = new GsonBuilder();
+
+        // Creating an adapter, that will recognize the class (flashcard or a deck)
+        JsonDeserializer<CompositeElement> deserializer = (json, typeOfT, context) -> {
+            JsonObject jsonObject = json.getAsJsonObject();
+
+            // Checking if it's a deck
+            if (jsonObject.has("children") || jsonObject.has("name") && !jsonObject.has("type")) {
+                return context.deserialize(json, Deck.class);
+            }
+
+            // Getting the flashcardType field for flashcards
+            String type = "TEXT";
+            if (jsonObject.has("flashcardType") && !jsonObject.get("flashcardType").isJsonNull()) {
+                type = jsonObject.get("flashcardType").getAsString();
+            }
+
+            // Decision on the type
+            if ("IMAGE".equals(type)) {
+                return context.deserialize(json, ImageFlashcard.class);
+            } else if ("DECK".equals(type)) {
+                return context.deserialize(json, Deck.class);
+            } else {
+                return context.deserialize(json, TextFlashcard.class);
+            }
+        };
+
+        builder.registerTypeAdapter(CompositeElement.class, deserializer);
+        builder.registerTypeAdapter(Flashcard.class, deserializer); 
+
+        return builder.setPrettyPrinting().create();
     }
 }

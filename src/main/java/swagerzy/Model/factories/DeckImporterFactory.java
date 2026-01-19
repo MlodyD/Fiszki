@@ -18,9 +18,9 @@ public class DeckImporterFactory {
             return new JSONDeckImporter();
         } 
         else if (fileName.endsWith(".txt")) {
-            // csv to to samo
+            // the same as csv
             return new CSVDeckImporter();
         }
-        throw new IllegalArgumentException("Nieobsługiwany format pliku: " + fileName);
+        throw new IllegalArgumentException("Unsupported file format: " + fileName);
     }
 }

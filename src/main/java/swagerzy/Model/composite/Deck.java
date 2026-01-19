@@ -64,7 +64,7 @@ public class Deck implements CompositeElement {
     }
     
     public String getType(){
-        return "Baraja: ";
+        return "Mazo ";
     }
     
     public void addChild(CompositeElement child){
@@ -81,5 +81,19 @@ public class Deck implements CompositeElement {
     
     public void setParent(CompositeElement element){
         this.parent = element;
+    }
+    
+    public List<Flashcard> getOnlyFlashcards() {
+        List<Flashcard> flashcards = new ArrayList<>();
+        for (Object child : children) { // List from the Composite pattern
+            if (child instanceof Flashcard && !(child instanceof Deck)) {
+                flashcards.add((Flashcard) child);
+            }
+        }
+        return flashcards;
+    }
+    
+    public void removeChild(CompositeElement child) {
+        children.remove(child);
     }
 }

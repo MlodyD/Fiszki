@@ -5,9 +5,8 @@
 package swagerzy.Model.command;
 
 import swagerzy.Model.DeckManager;
-import swagerzy.Model.composite.Deck;
 import swagerzy.Model.composite.Flashcard;
-import swagerzy.los_peces.App;
+import swagerzy.las_fichas.App;
 
 /**
  *
