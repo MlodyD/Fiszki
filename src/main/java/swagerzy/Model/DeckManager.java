@@ -18,6 +18,10 @@ import swagerzy.Model.strategy.StandardStrategy;
 import swagerzy.Model.strategy.StudyStrategy;
 import swagerzy.las_fichas.App;
 
+/**
+ * Singleton class that manages the overall state of the application.
+ * Acts as a Facade to coordinate data storage, study strategies, and observer notifications.
+ */
 public class DeckManager {
     private static DeckManager instance;
     private List<Deck> decks;
@@ -27,16 +31,31 @@ public class DeckManager {
     private List<StudyObserver> observers = new ArrayList<>();
     private Map<String, Integer> allDecksProgress = new HashMap<>();
     private int currentIndex = 0;
+    private boolean isPreviewMode = false;
+    private int savedIndexBeforePreview = -1;
     
     private DeckManager() {
         this.decks = new ArrayList<>();
     }
     
+    /**
+    * Returns the single instance of DeckManager.
+    * Uses lazy initialization to create the instance on first call.
+    * @return The unique DeckManager instance.
+    */
     public static DeckManager getInstance() {
         if (instance == null) {
             instance = new DeckManager();
         }
         return instance;
+    }
+    
+    public void setPreviewMode(boolean preview) {
+        this.isPreviewMode = preview;
+    }
+
+    public boolean isPreviewMode() {
+        return isPreviewMode;
     }
     
     public void createDeck(String deckName, String deckDescription){
@@ -98,11 +117,13 @@ public class DeckManager {
     }
 
     public void setCurrentDeck(Deck deck) {
-        if (this.currentDeck != null) {
+        if (this.currentDeck != null && !isPreviewMode) {
             allDecksProgress.put(this.currentDeck.getFront(), this.currentIndex);
         }
         this.currentDeck = deck;
-        this.currentIndex = allDecksProgress.getOrDefault(deck != null ? deck.getFront() : "", 0);
+        if (deck != null && !isPreviewMode) {
+            this.currentIndex = allDecksProgress.getOrDefault(deck.getFront(), 0);
+        }
     }
 
     public Flashcard getCurrentFlashcard() {
@@ -113,6 +134,11 @@ public class DeckManager {
         this.currentFlashcard = currentFlashcard;
     }
     
+    /**
+     * Sets the study strategy to be used in the current session.
+     * Implements the Strategy Pattern.
+     * @param strategy The specific study algorithm (Standard, Random, or Review).
+     */
     public void setStrategy(StudyStrategy strategy) {
         this.currentStrategy = strategy;
     }
@@ -134,6 +160,12 @@ public class DeckManager {
         observers.remove(observer);
     }
 
+    /**
+     * Notifies all registered observers about progress changes.
+     * Implements the Observer Pattern.
+     * @param currentIndex The current card index.
+     * @param total The total number of cards in the session.
+     */
     public void notifyObservers(int currentIndex, int total) {
         for (StudyObserver observer : observers) {
             observer.updateProgress(currentIndex, total);
@@ -149,13 +181,20 @@ public class DeckManager {
     }
     
     public void updateCurrentDeckProgress() {
-        if (this.currentDeck != null) {
+        if (this.currentDeck != null && !isPreviewMode) {
             allDecksProgress.put(this.currentDeck.getFront(), this.currentIndex);
         }
     }
     
+    /**
+     * Captures the current state of the study session.
+     * Implements the Memento Pattern.
+     * @return A snapshot of the session progress.
+     */
     public StudySessionMemento createMemento() {
-        updateCurrentDeckProgress();
+        if (!isPreviewMode) {
+            updateCurrentDeckProgress();
+        }
         return new StudySessionMemento(allDecksProgress);
     }
 
@@ -233,5 +272,25 @@ public class DeckManager {
             ((ImageFlashcard) card).setImagePath(newImagePath);
         }
         saveLibrary(); // Save changes in json file
+    }
+    
+    /**
+    * Forces the current index to a specific value.
+    * Used when a user selects a specific card from the deck list.
+    */
+   public void forceCurrentIndex(int index) {
+        if (savedIndexBeforePreview == -1) {
+            savedIndexBeforePreview = this.currentIndex;
+        }
+        this.currentIndex = index;
+        this.isPreviewMode = true;
+    }
+
+    public void restoreIndexAfterPreview() {
+        if (savedIndexBeforePreview != -1) {
+            this.currentIndex = savedIndexBeforePreview;
+            savedIndexBeforePreview = -1; // reset
+        }
+        this.isPreviewMode = false;
     }
 }

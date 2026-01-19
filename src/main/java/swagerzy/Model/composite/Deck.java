@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Composite class representing a collection of flashcards or sub-decks.
+ */
 public class Deck implements CompositeElement {
     
     protected transient final String id = java.util.UUID.randomUUID().toString();
@@ -47,6 +50,10 @@ public class Deck implements CompositeElement {
         this.deckName = deckName;
     }
 
+    /**
+     * Returns the list of children elements.
+     * @return List of CompositeElement children.
+     */
     public List<CompositeElement> getChildren() {
         return children;
     }

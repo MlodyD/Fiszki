@@ -1,4 +1,4 @@
-module swagerzy.los_peces {
+module swagerzy.las_fichas {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.base;

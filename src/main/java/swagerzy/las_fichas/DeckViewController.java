@@ -24,6 +24,9 @@ import swagerzy.Model.strategy.RandomStrategy;
 import swagerzy.Model.strategy.ReviewStrategy;
 import swagerzy.Model.strategy.StandardStrategy;
 
+/**
+ * Controller for the deck management view.
+ */
 public class DeckViewController extends Controller implements Initializable {
 
     @FXML
@@ -41,6 +44,9 @@ public class DeckViewController extends Controller implements Initializable {
     @FXML
     private Button reviewStudyBtn;
     
+    /**
+     * Updates the text of the navigation button based on the hierarchy.
+     */
     public void changeBackButtonName(){
         Deck current = DeckManager.getInstance().getCurrentDeck();
         
@@ -101,6 +107,7 @@ public class DeckViewController extends Controller implements Initializable {
     
     @FXML
     private void handleNormalStudy() {
+        deckManager.setPreviewMode(false);
         DeckManager.getInstance().setStrategy(new StandardStrategy());
         App.switchView("FlashcardView");
     }
@@ -119,18 +126,25 @@ public class DeckViewController extends Controller implements Initializable {
         App.switchView("FlashcardView");
     }
     
+    /**
+     * Refreshes the view content.
+     */
     public void refreshView() {
         vbox.getChildren().clear(); // Clearing old buttons
         createButtons();           // Drawing new buttons
         changeBackButtonName();
     }
     
+    /**
+     * Dynamically creates buttons for all elements in the current deck.
+     */
     public void createButtons() {
         Deck current = DeckManager.getInstance().getCurrentDeck();
         DeckTitle.setText(current.getFront());
         DeckDescription.setText(current.getDescription());
 
         List<CompositeElement> elementList = current.getChildren();
+        List<Flashcard> onlyCards = current.getOnlyFlashcards();
 
         for (CompositeElement currentElement : elementList) {
             // Box for opening, editing and deleting
@@ -143,13 +157,23 @@ public class DeckViewController extends Controller implements Initializable {
             btn.setMaxWidth(Double.MAX_VALUE);
             javafx.scene.layout.HBox.setHgrow(btn, javafx.scene.layout.Priority.ALWAYS);
 
-            Command openCommand;
             if (currentElement instanceof Deck) {
-                openCommand = new OpenDeckCommand((Deck) currentElement);
-            } else {
-                openCommand = new OpenFlashcardCommand((Flashcard) currentElement);
+                Command openDeck = new OpenDeckCommand((Deck) currentElement);
+                btn.setOnAction(e -> openDeck.execute());
+            } else if (currentElement instanceof Flashcard) {
+                Flashcard selectedFlashcard = (Flashcard) currentElement;
+                // Finding the index of the flashcard in current deck
+                int cardIndex = onlyCards.indexOf(selectedFlashcard);
+
+                btn.setOnAction(e -> {
+                    deckManager.setPreviewMode(true);
+                    deckManager.forceCurrentIndex(cardIndex);
+                    deckManager.setCurrentFlashcard(selectedFlashcard);
+                    deckManager.setStrategy(new swagerzy.Model.strategy.StandardStrategy());
+                    App.switchView("FlashcardView");
+                });
             }
-            btn.setOnAction(e -> openCommand.execute());
+
             row.getChildren().add(btn);
             
             // Edit button

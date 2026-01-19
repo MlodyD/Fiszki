@@ -75,7 +75,9 @@ public class FlashcardViewController implements Initializable, StudyObserver {
     @FXML
     private Button nextButton;
 
-    // Animation for flipping the card (Y-axis rotation)
+    /**
+    * Triggers the 3D flip animation for the flashcard.
+    */
     public void flipCard() {
         RotateTransition rotator = new RotateTransition(Duration.millis(500), cardContainer);
         rotator.setAxis(Rotate.Y_AXIS);
@@ -186,11 +188,20 @@ public class FlashcardViewController implements Initializable, StudyObserver {
         }
     }
     
+    /**
+    * Saves the current session and returns to the deck view.
+    */
     @FXML
     public void goUp(){
         DeckManager dm = DeckManager.getInstance();
-        dm.updateCurrentDeckProgress();
+        
+        if (dm.isPreviewMode()) {
+            dm.restoreIndexAfterPreview();
+            App.switchView("DeckView");
+            return; 
+        }
 
+        dm.updateCurrentDeckProgress();
         StorageService storage = new StorageService();
         storage.saveSessionMemento(dm.createMemento()); // Saving to JSON
 

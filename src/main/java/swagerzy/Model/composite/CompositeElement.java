@@ -4,6 +4,10 @@
  */
 package swagerzy.Model.composite;
 
+/**
+ * Component interface for the Composite pattern.
+ * Defines common operations for both leaf nodes (Flashcards) and composites (Decks).
+ */
 public interface CompositeElement {
     public CompositeElement getParent();
     public String getFront();

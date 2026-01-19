@@ -12,6 +12,9 @@ import java.util.Map;
  *
  * @author igawl
  */
+/**
+ * Immutable object representing a snapshot of the study progress.
+ */
 public class StudySessionMemento implements Serializable{
     private final Map<String, Integer> deckProgress;
 

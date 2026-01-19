@@ -8,6 +8,10 @@ import swagerzy.Model.composite.TextFlashcard;
  *
  * @author maciejdaszkiewicz
  */
+/**
+ * Factory class responsible for creating different types of Flashcards.
+ * Encapsulates instantiation logic to decouple the UI from specific card subclasses.
+ */
 public class FlashcardFactory {
     
     public TextFlashcard createTextFlashcard(String question, String answer) {
@@ -19,6 +23,12 @@ public class FlashcardFactory {
         return tf;
     }
     
+    /**
+     * Creates a new instance of an Image-based flashcard.
+     * @param imagePath Path to the image file.
+     * @param answer The translation or answer for the card.
+     * @return A fully initialized ImageFlashcard.
+     */
     public ImageFlashcard createImageFlashcard(String imagePath, String answer) {
         return new ImageFlashcard(imagePath, answer);
     }

@@ -13,7 +13,8 @@ import swagerzy.Model.composite.Deck;
 import swagerzy.Model.memento.StudySessionMemento;
 
 /**
- * JavaFX App
+ * Main application class for Las Fichas.
+ * Handles the JavaFX stage and scene switching.
  */
 public class App extends Application {
 
@@ -50,10 +51,19 @@ public class App extends Application {
         stage.show();
     }
     
+    /**
+     * Changes the root FXML document for the current stage.
+     * @param fxml The name of the FXML file.
+     * @throws IOException If the FXML file is not found.
+     */
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
     
+    /**
+     * Switches the view to a specific FXML and refreshes the scene.
+     * @param viewName The name of the view to switch to.
+     */
     public static void switchView(String viewName) {
         try {
             setRoot(viewName);
@@ -84,9 +94,11 @@ public class App extends Application {
 
         storage.saveLibrary(dm.getDecks());
     }
-
-
-
+    
+    /**
+     * Application entry point.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         launch();
     }

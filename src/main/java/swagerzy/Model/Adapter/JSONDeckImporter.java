@@ -14,6 +14,10 @@ import swagerzy.Model.composite.CompositeElement;
 import swagerzy.Model.composite.Deck;
 import swagerzy.Model.composite.TextFlashcard;
 
+/**
+ * Adapter class that converts JSON file structures into the internal Deck hierarchy.
+ * Implements the DeckImporter interface to allow polymorphic data loading.
+ */
 public class JSONDeckImporter implements DeckImporter {
 
     private Gson gson;
@@ -22,6 +26,12 @@ public class JSONDeckImporter implements DeckImporter {
         this.gson = new Gson();
     }
 
+    /**
+     * Adapts the GSON library output to the application's Composite model.
+     * @param file The JSON file to import.
+     * @return A structured Deck object.
+     * @throws Exception If the JSON format is invalid.
+     */
     @Override
     public Deck importDeck(File file) throws Exception {
         // Gson (Adaptee) reads a file and creates a tree of JSON objects
